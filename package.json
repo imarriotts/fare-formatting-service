@@ -8,6 +8,7 @@
     "test:watch": "jest --verbose --detectOpenHandles --no-cache --watch",
     "lint": "eslint 'src/**/*.ts' --quiet --fix",
     "validate": "sls package",
+    "install:dependencies": "npm ci",
     "debug": "node --inspect node_modules/serverless/bin/serverless offline -s dev",
     "code:offline": "sls offline start",
     "upload-data": "npx ts-node ./src/cli/upload-data.ts",

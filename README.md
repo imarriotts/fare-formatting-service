@@ -1,95 +1,197 @@
-# Serverless - AWS Node.js Typescript
+# Fare Formatting Service
+## Table of Contents
+
+- [API Documentation](#api-documentation)
+- [Serverless Configuration](#serverless-configuration)
+- [Servers](#servers)
+- [Installation/deployment instructions](#installationdeployment-instructions)
+- [Project Structure](#project-structure)
+
+## API Documentation
+
+The Fare Formatting API is a serverless application built on AWS using the Serverless Framework. This API is responsible for fare formatting configuration and fare management.
+
+### Config Endpoints
+
+- `GET /config` : Retrieves a basic configuration. Required query parameters are `id` and `type`.
+
+- `POST /config` : Handles the creation or updating of a basic configuration. Required body parameters are `id`, `type`, and `data`.
+
+### Fare Endpoints
+
+- `GET /fare` : Retrieves fare information. Required query parameters are `country` and `currency`.
+
+- `POST /fare` : Handles the creation of fare data. Required body parameters are `country`, `currency`, and `data`.
+
+- `DELETE /fare` : Handles the deletion of fare data. Required query parameters are `country` and `currency`.
+
+- `POST /fare/convert` : Converts a fare. Required body parameters are `country`, `currency`, and `value`.
+
+### Propagation Endpoint
+
+- `GET /propagate` : Propagates the initial data to the database.
+
+   > **Note** This API must be called before any other endpoints are called. It will upload the initial data to the database. If this endpoint is not called, the other endpoints will not work as expected.
+
+### Documentation Endpoints
+
+- `GET /docs` : Returns the Swagger documentation in YAML format.
+
+For more detailed information about these endpoints (including response formats, error messages, etc.), refer to the Swagger documentation, which can be accessed by visiting the `/docs` endpoint of the API.
+
+---
+## Serverless Configuration
+
+The Fare Formatting API service is configured to run on AWS and is defined using the Serverless Framework. The service is named 'fare-formatting-service' and the provider is AWS. It is configured to run in the 'us-east-2' region using the 'nodejs14.x' runtime.
+
+The service is packaged individually and dev dependencies are excluded. The esbuild plugin is used for bundling and sourcemaps are enabled for better error tracking.
+
+The service uses AWS services such as S3 and DynamoDB. It has IAM roles set up to allow necessary actions on these resources.
+
+The environment variables are defined in the provider block of the serverless configuration file, which includes the names for the DynamoDB tables and S3 bucket. The log retention period for CloudWatch Logs is set to 1 day.
+
+------
+## Servers
+
+- Development server: `https://ckyic0y33k.execute-api.us-east-2.amazonaws.com/dev`. Note that the URL of the development server may change if the API Gateway is redeployed. To prevent this, a custom domain could be used, but this is out of scope for this demo.
+
+- Local server: `http://localhost:3000`
+
 
 This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/).
 
-For detailed instructions, please refer to the [documentation](https://www.serverless.com/framework/docs/providers/aws/).
-
 ## Installation/deployment instructions
 
-Depending on your preferred package manager, follow the instructions below to deploy your project.
+> **Requirements**: NodeJS `lts/fermium`. If you're using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to ensure you're using the same Node version in local and in your lambda's runtime.
 
-> **Requirements**: NodeJS `lts/fermium (v.14.15.0)`. If you're using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to ensure you're using the same Node version in local and in your lambda's runtime.
+> You also will need an AWS account and the [AWS CLI](https://aws.amazon.com/cli/) configured in your machine.
 
-### Using NPM
+## Installation / Deployment Instructions
 
-- Run `npm i` to install the project dependencies
-- Run `npx sls deploy` to deploy this stack to AWS
+1. **Clone the repository**: Clone the repository to your local machine.
 
-### Using Yarn
+    ```bash
+    git clone git@github.com:imarriotts/fare-formatting-service.git
+    ```
 
-- Run `yarn` to install the project dependencies
-- Run `yarn sls deploy` to deploy this stack to AWS
+2. **Install the dependencies**: Navigate into the directory of the cloned repository and install the necessary packages.
 
-## Test your service
+    ```bash
+    cd fare-formatting-service
+    npm run install:dependencies
+    ```
 
-This template contains a single lambda function triggered by an HTTP request made on the provisioned API Gateway REST API `/hello` route with `POST` method. The request body must be provided as `application/json`. The body structure is tested by API Gateway against `src/functions/hello/schema.ts` JSON-Schema definition: it must contain the `name` property.
+3. **Run Tests**: Execute unit tests to make sure everything is set up correctly.
 
-- requesting any other path than `/hello` with any other method than `POST` will result in API Gateway returning a `403` HTTP error code
-- sending a `POST` request to `/hello` with a payload **not** containing a string property named `name` will result in API Gateway returning a `400` HTTP error code
-- sending a `POST` request to `/hello` with a payload containing a string property named `name` will result in API Gateway returning a `200` HTTP status code with a message saluting the provided name and the detailed event processed by the lambda
+    ```bash
+    npm run test
+    ```
 
-> :warning: As is, this template, once deployed, opens a **public** endpoint within your AWS account resources. Anybody with the URL can actively execute the API Gateway endpoint and the corresponding lambda. You should protect this endpoint with the authentication method of your choice.
+4. **Run Lint**: Check code quality and format it.
 
-### Locally
+    ```bash
+    npm run lint
+    ```
 
-In order to test the hello function locally, run the following command:
+5. **Validate Serverless Configurations**: You can validate your serverless configurations with the following command.
 
-- `npx sls invoke local -f hello --path src/functions/hello/mock.json` if you're using NPM
-- `yarn sls invoke local -f hello --path src/functions/hello/mock.json` if you're using Yarn
+    ```bash
+    npm run validate
+    ```
 
-Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
+6. **Local Development**: If you want to test your application locally, you can run the serverless application offline, this will start a local server on port 3000. 
 
-### Remotely
+    ```bash
+    npm run code:offline
+    ```
 
-Copy and replace your `url` - found in Serverless `deploy` command output - and `name` parameter in the following `curl` command in your terminal or in Postman to test your newly deployed application.
+> **Note**: that the AWS services will not be available locally and they will be pointing to the AWS services in the development environment.
 
-```
-curl --location --request POST 'https://myApiEndpoint/dev/hello' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "name": "Frederic"
-}'
-```
+7. **Deployment**: Deploy the application to the desired environment.
 
-## Template features
+    For Development:
 
-### Project structure
+    ```bash
+    npm run deploy:dev
+    ```
+
+    For Production:
+
+    ```bash
+    npm run deploy:prod
+    ```
+
+> **Important**: After a successful deployment, you will get an API Gateway endpoint. You can use this endpoint to access your application. Before calling any endpoint make sure to execute /propagate endpoint to propagate the initial data to the database.  
+
+### Debugging
+
+To start debugging in VS Code, use the `Debug Serverless Offline` configuration in `.vscode/launch.json`.
+
+1. Start the debug process by clicking on the Run and Debug panel on the left side of VS Code, then click on the start debugging button (or press F5).
+
+2. Set breakpoints in your code where you want the execution to pause, then send a request to your application. The code should stop at the breakpoint and you can inspect variables, the call stack, and the upcoming commands.
+
+> **Note**: This debug configuration assumes you're using the serverless-offline plugin and have set it to run on port 3000.
+
+## Project structure
 
 The project code base is mainly located within the `src` folder. This folder is divided in:
 
-- `functions` - containing code base and configuration for your lambda functions
-- `libs` - containing shared code base between your lambdas
-
 ```
 .
-├── src
-│   ├── functions               # Lambda configuration and source code folder
-│   │   ├── hello
-│   │   │   ├── handler.ts      # `Hello` lambda source code
-│   │   │   ├── index.ts        # `Hello` lambda Serverless configuration
-│   │   │   ├── mock.json       # `Hello` lambda input parameter, if any, for local invocation
-│   │   │   └── schema.ts       # `Hello` lambda input event JSON-Schema
-│   │   │
-│   │   └── index.ts            # Import/export of all lambda configurations
-│   │
-│   └── libs                    # Lambda shared code
-│       └── apiGateway.ts       # API Gateway specific helpers
-│       └── handlerResolver.ts  # Sharable library for resolving lambda handlers
-│       └── lambda.ts           # Lambda middleware
-│
-├── package.json
-├── serverless.ts               # Serverless service file
-├── tsconfig.json               # Typescript compiler configuration
-├── tsconfig.paths.json         # Typescript paths
-└── webpack.config.js           # Webpack configuration
+├── github                           # Contains GitHub related files
+│   ├── workflows                    # Contains GitHub Actions workflows
+│   │   ├── deploy_dev.yml           # Contains the workflow for deploying to the development environment 
+│   │   ├── deploy_prod.yml          # Contains the workflow for deploying to the production environment
+├── package.json                     # Defines the project dependencies
+├── .vscode                          # Contains settings for Visual Studio Code IDE
+│   ├── launch.json                  # Configurations for launching and debugging the project
+├── tsconfig.paths.json              # Path mapping for TypeScript modules
+├── .eslintrc.json                   # Configuration for Eslint code linter
+├── tsconfig.json                    # Configuration for TypeScript compiler
+├── README.md                        # The file you're currently reading
+├── .gitignore                       # Specifies which files should be ignored by Git
+├── serverless.ts                    # Defines the Serverless service
+├── .nvmrc                           # Specifies the Node.js version for Node Version Manager
+├── package-lock.json                # Automatically generated file
+├── src                              # The source code of the API
+│   ├── functions                    # Contains the API lambda function handlers
+│   │   ├── fare                     # Contains functions related to fare handling
+│   │   │   ├── util.ts              # Utility functions for the fare module
+│   │   │   ├── builder.ts           # Builds the responses for the fare module
+│   │   │   ├── handler.ts           # The fare API lambda function
+│   │   │   ├── handler.test.ts      # Tests for the fare handler function
+│   │   │   ├── builder.test.ts      # Tests for the fare builder functions
+│   │   │   ├── util.test.ts         # Tests for the fare utility functions
+│   │   │   ├── types.ts             # TypeScript types for the fare module
+│   │   ├── handler                  # The handler module
+│   │   │   ├── handler.ts           # The handler function for the service
+│   │   │   ├── app.ts               # The application setup
+│   │   │   ├── schema.ts            # Contains JSON schema definitions
+│   │   │   ├── index.ts             # Index file to export handlers
+│   │   ├── services                 # Service layer
+│   │   │   ├── aws                  # AWS related services
+│   │   │   │   ├── constants.ts     # Constants related to AWS services
+│   │   │   │   ├── s3.ts            # Interactions with AWS S3
+│   │   │   │   ├── dynamodb.ts      # Interactions with AWS DynamoDB
+│   │   ├── config                   # Config related functions
+│   │   │   ├── util.ts              # Utility functions for the config module
+│   │   │   ├── handler.ts           # Handler for config related operations
+│   │   │   ├── handler.test.ts      # Tests for the config handler
+│   │   │   ├── util.test.ts         # Tests for the config utility functions
+│   │   │   ├── types.ts             # TypeScript types for the config module
+│   │   ├── index.ts                 # Index file to export functions
+│   ├── libs                         # Library code
+│   │   ├── handler-resolver.ts      # Resolves handlers for routes
+│   │   ├── handler-resolver.test.ts # Tests for the handler resolver
+│   ├── cli                          # Command line scripts
+│   │   ├── data                     # Data for initial loading
+│   │   │   ├── currency.json        # Currency data
+│   │   │   ├── defaultFare.json     # Default fare data
+│   │   │   ├── country.json         # Country data
+│   │   ├── upload-data.ts           # Script to upload initial data
+│   │   ├── upload-data.test.ts      # Tests for the data upload script
+├── jest.config.js                   # Configuration file for Jest testing framework
+└── LICENSE                          # License file
+
 ```
-
-### 3rd party libraries
-
-- [json-schema-to-ts](https://github.com/ThomasAribart/json-schema-to-ts) - uses JSON-Schema definitions used by API Gateway for HTTP request validation to statically generate TypeScript types in your lambda's handler code base
-- [middy](https://github.com/middyjs/middy) - middleware engine for Node.Js lambda. This template uses [http-json-body-parser](https://github.com/middyjs/middy/tree/master/packages/http-json-body-parser) to convert API Gateway `event.body` property, originally passed as a stringified JSON, to its corresponding parsed object
-- [@serverless/typescript](https://github.com/serverless/typescript) - provides up-to-date TypeScript definitions for your `serverless.ts` service file
-
-### Advanced usage
-
-Any tsconfig.json can be used, but if you do, set the environment variable `TS_NODE_CONFIG` for building the application, eg `TS_NODE_CONFIG=./tsconfig.app.json npx serverless webpack`
