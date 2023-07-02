@@ -6,6 +6,9 @@
 - [Servers](#servers)
 - [Installation/deployment instructions](#installationdeployment-instructions)
 - [Project Structure](#project-structure)
+- [GitHub Actions CI/CD](#github-actions-cicd)
+- [License](#license)
+- [Afterword](#afterword)
 
 ## API Documentation
 
@@ -195,3 +198,38 @@ The project code base is mainly located within the `src` folder. This folder is 
 └── LICENSE                          # License file
 
 ```
+## GitHub Actions CI/CD
+This project uses GitHub Actions for continuous integration (CI) and continuous deployment (CD). There are two separate workflows for deploying the application to the development (dev) and production (prod) environments. 
+
+### Deploying to Development
+
+The development environment is updated automatically whenever changes are pushed to the `develop` branch. Before the deployment, all project tests are run to ensure the stability of the system. The steps involved in this process are:
+
+1. Checkout the code.
+2. Setup Node.js.
+3. Install the project dependencies.
+4. Run the tests.
+5. Deploy the application to the development environment.
+
+The workflow for this process can be found in the `.github/workflows/deploy_dev.yml` file.
+
+### Deploying to Production
+
+The production environment is updated automatically whenever a pull request to the `main` branch is closed and successfully merged. Like the development deployment, all project tests are run before the application is deployed. The steps involved in this process are:
+
+1. Checkout the code.
+2. Setup Node.js.
+3. Install the project dependencies.
+4. Run the tests.
+5. Deploy the application to the production environment.
+
+The workflow for this process can be found in the `.github/workflows/deploy_prod.yml` file.
+
+You need to set up your AWS credentials as secrets in your GitHub repository for these workflows to run successfully. The secrets you need to set up are `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+## License
+This project is licensed under the terms of the GNU GENERAL PUBLIC LICENSE Version 3. See the [LICENSE](LICENSE) file for details.
+
+
+## Afterword
+This project was created as a coding challenge for a job application. It was a fun project to work on and I utilized a lot of new technologies and tools. I learned a lot about AWS and the Serverless Framework. I also learned a lot about CI/CD and GitHub Actions. I hope you enjoy looking through this project as much as I enjoyed working on it.

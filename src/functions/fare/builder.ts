@@ -35,9 +35,9 @@ export class FareBuilder {
 
         // Handle displayAfter
         if (this.fare.displayAfter) {
-            return `${formattedNumber} ${currencyDisplay}`;
+            return `${formattedNumber} ${currencyDisplay}`.trim();
         } else {
-            return `${currencyDisplay} ${formattedNumber}`;
+            return `${currencyDisplay} ${formattedNumber}`.trim();
         }
     }
 }
