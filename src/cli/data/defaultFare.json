@@ -1,0 +1,12 @@
+{
+    "id": "fare",
+    "type": "default",
+    "data": {
+        "currencyCode": "",
+        "currencySymbol": "",
+        "displayAfter": false,
+        "displayCents": true,
+        "displayFormat": "#,###.##",
+        "useCurrencyCode": false
+    }
+}

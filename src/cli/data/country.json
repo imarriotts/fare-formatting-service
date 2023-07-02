@@ -1,0 +1,106 @@
+{
+  "id": "country",
+  "type": "default",
+  "data": [
+    {
+      "countryCode": "US",
+      "name": "United States"
+    },
+    {
+      "countryCode": "CA",
+      "name": "Canada"
+    },
+    {
+      "countryCode": "MX",
+      "name": "Mexico"
+    },
+    {
+      "countryCode": "BR",
+      "name": "Brazil"
+    },
+    {
+      "countryCode": "AR",
+      "name": "Argentina"
+    },
+    {
+      "countryCode": "DE",
+      "name": "Germany"
+    },
+    {
+      "countryCode": "FR",
+      "name": "France"
+    },
+    {
+      "countryCode": "IT",
+      "name": "Italy"
+    },
+    {
+      "countryCode": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "countryCode": "ES",
+      "name": "Spain"
+    },
+    {
+      "countryCode": "RU",
+      "name": "Russia"
+    },
+    {
+      "countryCode": "CN",
+      "name": "China"
+    },
+    {
+      "countryCode": "JP",
+      "name": "Japan"
+    },
+    {
+      "countryCode": "IN",
+      "name": "India"
+    },
+    {
+      "countryCode": "AU",
+      "name": "Australia"
+    },
+    {
+      "countryCode": "ZA",
+      "name": "South Africa"
+    },
+    {
+      "countryCode": "EG",
+      "name": "Egypt"
+    },
+    {
+      "countryCode": "NG",
+      "name": "Nigeria"
+    },
+    {
+      "countryCode": "KE",
+      "name": "Kenya"
+    },
+    {
+      "countryCode": "SA",
+      "name": "Saudi Arabia"
+    },
+    {
+      "countryCode": "AE",
+      "name": "United Arab Emirates"
+    },
+    {
+      "countryCode": "TR",
+      "name": "Turkey"
+    },
+    {
+      "countryCode": "ID",
+      "name": "Indonesia"
+    },
+    {
+      "countryCode": "TH",
+      "name": "Thailand"
+    },
+    {
+      "countryCode": "VN",
+      "name": "Vietnam"
+    }
+  ]
+}

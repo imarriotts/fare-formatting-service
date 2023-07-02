@@ -1,0 +1,106 @@
+{
+    "id": "currency",
+    "type": "default",
+    "data": [
+        {
+            "currencyName": "Dollar",
+            "currencyCode": "USD"
+        },
+        {
+            "currencyName": "Euro",
+            "currencyCode": "EUR"
+        },
+        {
+            "currencyName": "Pound Sterling",
+            "currencyCode": "GBP"
+        },
+        {
+            "currencyName": "Yen",
+            "currencyCode": "JPY"
+        },
+        {
+            "currencyName": "Australian Dollar",
+            "currencyCode": "AUD"
+        },
+        {
+            "currencyName": "Canadian Dollar",
+            "currencyCode": "CAD"
+        },
+        {
+            "currencyName": "Swiss Franc",
+            "currencyCode": "CHF"
+        },
+        {
+            "currencyName": "Renminbi",
+            "currencyCode": "CNY"
+        },
+        {
+            "currencyName": "Indian Rupee",
+            "currencyCode": "INR"
+        },
+        {
+            "currencyName": "Brazilian Real",
+            "currencyCode": "BRL"
+        },
+        {
+            "currencyName": "Russian Ruble",
+            "currencyCode": "RUB"
+        },
+        {
+            "currencyName": "South African Rand",
+            "currencyCode": "ZAR"
+        },
+        {
+            "currencyName": "Turkish Lira",
+            "currencyCode": "TRY"
+        },
+        {
+            "currencyName": "Korean Won",
+            "currencyCode": "KRW"
+        },
+        {
+            "currencyName": "Mexican Peso",
+            "currencyCode": "MXN"
+        },
+        {
+            "currencyName": "Indonesian Rupiah",
+            "currencyCode": "IDR"
+        },
+        {
+            "currencyName": "Norwegian Krone",
+            "currencyCode": "NOK"
+        },
+        {
+            "currencyName": "New Zealand Dollar",
+            "currencyCode": "NZD"
+        },
+        {
+            "currencyName": "Polish Zloty",
+            "currencyCode": "PLN"
+        },
+        {
+            "currencyName": "Swedish Krona",
+            "currencyCode": "SEK"
+        },
+        {
+            "currencyName": "Singapore Dollar",
+            "currencyCode": "SGD"
+        },
+        {
+            "currencyName": "Hong Kong Dollar",
+            "currencyCode": "HKD"
+        },
+        {
+            "currencyName": "Icelandic Krona",
+            "currencyCode": "ISK"
+        },
+        {
+            "currencyName": "Czech Koruna",
+            "currencyCode": "CZK"
+        },
+        {
+            "currencyName": "Thai Baht",
+            "currencyCode": "THB"
+        }
+    ]
+}

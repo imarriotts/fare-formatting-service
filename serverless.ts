@@ -12,6 +12,8 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     region: 'us-east-2',
     runtime: 'nodejs14.x',
+    memorySize: 192,
+    timeout: 30,
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -28,7 +30,7 @@ const serverlessConfiguration: AWS = {
             Effect: 'Allow',
             Action: ['s3:GetObject', 's3:PutObject'],
             Resource: [
-              'arn:aws:s3:::fare-bucket/*',
+              'arn:aws:s3:::${self:provider.stage}-fare-bucket/*',
             ],
           },
           {
