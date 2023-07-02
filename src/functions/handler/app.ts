@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import fastifySwagger from '@fastify/swagger';
+import { helloSchema } from './schema';
 
 const app = Fastify({ logger: true });
 
@@ -12,27 +13,7 @@ app.register(fastifySwagger, {
 
 app.register(async function (fastify) {
     fastify.get('/hello', {
-        schema: {
-            description: 'Hello endpoint',
-            tags: ['greeting'],
-            summary: 'Returns a hello message',
-            querystring: {
-                type: 'object',
-                required: ['name'],
-                properties: {
-                    name: { type: 'string' }
-                }
-            },
-            response: {
-                200: {
-                    description: 'Successful response',
-                    type: 'object',
-                    properties: {
-                        message: { type: 'string' }
-                    }
-                }
-            }
-        },
+        schema: helloSchema,
         handler: async (request, reply) => {
             const { name = 'Guest' } = request?.query as any;
             return reply.send({ "message": `Hello, my name is ${name}` });

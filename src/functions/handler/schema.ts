@@ -1,9 +1,21 @@
 export const helloSchema = {
+    description: 'Hello endpoint',
+    tags: ['greeting'],
+    summary: 'Returns a hello message',
     querystring: {
         type: 'object',
-        required: ['userId'],
+        required: ['name'],
         properties: {
-            userId: { type: 'string' }
+            name: { type: 'string' }
+        }
+    },
+    response: {
+        200: {
+            description: 'Successful response',
+            type: 'object',
+            properties: {
+                message: { type: 'string' }
+            }
         }
     }
 }

@@ -6,9 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.ts' --quiet --fix",
-    "offline": "sls offline start",
+    "validate": "sls package",
     "debug": "node --inspect node_modules/serverless/bin/serverless offline -s dev",
-    "generate:doc": "ts-node ./src/cli/generateDoc.ts"
+    "code:offline": "sls offline start",
+    "code:documentation": "ts-node ./src/cli/generateDoc.ts",
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy --stage prod"
   },
   "engines": {
     "node": ">=14.21.3"
