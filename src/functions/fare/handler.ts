@@ -1,5 +1,5 @@
 import { DynamoDBTableKeys, DynamoDBTableSortKeys, DynamoDBTables } from "@functions/services/aws/constants";
-import { dynamoDbHelper } from "@functions/services/aws/dynamodb";
+import * as dynamoDbHelper from "@functions/services/aws/dynamodb";
 import { FareBuilder } from "./builder";
 import { Fare, fareConvert, fareCreate, fareDelete, fareSearch } from "./types";
 import { checkFareInput } from "./util";

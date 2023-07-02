@@ -1,7 +1,7 @@
-import { dynamoDbHelper } from "@functions/services/aws/dynamodb";
+import * as dynamoDbHelper from "@functions/services/aws/dynamodb";
 import { DynamoDBTableKeys, DynamoDBTableSortKeys, DynamoDBTables } from "@functions/services/aws/constants";
 import { SearchConfig } from "./types";
-import { propagateConfig } from "./utils";
+import { propagateConfig } from "./util";
 
 /**
  * @description Search for a basic configuration

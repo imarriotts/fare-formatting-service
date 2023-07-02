@@ -15,8 +15,20 @@ export class FareBuilder {
         const groupSeparator = this.fare.displayFormat === DisplayFormat.COMMA_SEPARATOR ? ',' : '.';
         const decimalSeparator = this.fare.displayFormat === DisplayFormat.COMMA_SEPARATOR ? '.' : ',';
 
-        // Format the number
-        const formattedNumber = num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, groupSeparator).replace('.', decimalSeparator);
+        // Split the number into integer and decimal parts
+        const [integerPart, decimalPart] = num.toString().split('.');
+
+        // Format the integer part
+        const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, groupSeparator);
+
+        // Round the decimal part
+        let formattedDecimalPart = decimalPart ? decimalPart.slice(0, decimalPoints) : '';
+
+        // Combine the parts if necessary
+        let formattedNumber = formattedIntegerPart;
+        if (this.fare.displayCents) {
+            formattedNumber += decimalSeparator + formattedDecimalPart.padEnd(decimalPoints, '0');
+        }
 
         // Decide the currency display
         const currencyDisplay = this.fare.useCurrencyCode ? this.fare.currencyCode : (this.fare.currencySymbol || this.fare.currencyCode);

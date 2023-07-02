@@ -1,6 +1,6 @@
 import { DynamoDBTableKeys, DynamoDBTableSortKeys, DynamoDBTables } from "@functions/services/aws/constants";
-import { dynamoDbHelper } from "@functions/services/aws/dynamodb";
 import { configCountry, configCurrency } from "./types";
+import * as dynamoDbHelper from "@functions/services/aws/dynamodb";
 
 /**
  * @description Checks if the country and currency are valid

@@ -1,5 +1,5 @@
 import { DynamoDBTables, S3Buckets } from "@functions/services/aws/constants";
-import { dynamoDbHelper } from "@functions/services/aws/dynamodb";
+import * as dynamoDbHelper from "@functions/services/aws/dynamodb";
 import { s3Helper } from "@functions/services/aws/s3";
 
 const COUNTRY_FILE = 'country.json';
