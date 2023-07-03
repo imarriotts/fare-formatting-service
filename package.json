@@ -11,8 +11,8 @@
     "install:dependencies": "npm i",
     "debug": "node --inspect node_modules/serverless/bin/serverless offline -s dev",
     "code:offline": "sls offline start",
-    "deploy:dev": "STAGE=dev sls deploy --stage dev && STAGE=dev npx ts-node ./src/cli/upload-data.ts",
-    "deploy:prod": "STAGE=prod sls deploy --stage prod && STAGE=prod npx ts-node ./src/cli/upload-data.ts"
+    "deploy:dev": "sls deploy --stage dev && STAGE=dev npx ts-node ./src/cli/upload-data.ts",
+    "deploy:prod": "sls deploy --stage prod && STAGE=prod npx ts-node ./src/cli/upload-data.ts"
   },
   "engines": {
     "node": ">=14.21.3"
